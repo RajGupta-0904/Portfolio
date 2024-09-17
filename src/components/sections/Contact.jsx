@@ -105,26 +105,23 @@ const ContactButton = styled.input`
 `;
 
 const Contact = () => {
-  const form = useRef();
-  const handelSubmit = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_l1igp16",//service id
-        "template_hsi1yh5",//template id
-        form.current,
-        "y7hiG4ckEwMmGKzyZ"//tourapiid// token id 
-      )
-      .then(
-        (result) => {
-          alert("Message Sent");
-          form.current.result();
-        },
-        (error) => {
-          alert(error);
-        }
-      );
-  };
+  e.preventDefault();
+  emailjs
+    .sendForm(
+      "service_l1igp16", // service ID
+      "template_hsi1yh5", // template ID
+      form.current, // use form.current here
+      "y7hiG4ckEwMmGKzyZ" // user token
+    )
+    .then(
+      (result) => {
+        alert("Message Sent");
+        form.current.reset(); // use reset() to clear the form
+      },
+      (error) => {
+        alert("An error occurred: " + error.text);
+      }
+    );
   return (
     <Container id="Education">
       <Wrapper>
